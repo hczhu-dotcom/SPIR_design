@@ -11,7 +11,7 @@ git clone https://github.com/hczhu-dotcom/SPIR_design
 ```
 
 ## Step2: Predecting the structure of plant pathogen protein 
-using AlphaFold 3, by using its webserver: https://alphafoldserver.com/.
+Predecting the structure of plant pathogen protein using AlphaFold 3, by using its webserver: https://alphafoldserver.com/.
 
 ## Step3: Triming the pathogen protein
 Triming the N and C unstructured region of the plant pathogen protein using PyMol, and converting the CIF (Crystallographic Information File) format into the PDB (Protein Data Bank) format. This process would result the pathogen_protein.pdb, such as PVY_CP.pdb.
