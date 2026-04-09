@@ -23,7 +23,7 @@ Generating the input json file for BindCraft, by running:
 conda activate BindCraft
 python step4_bindercraft_input_json \
 	--your_case_name #the_name_of_your_job, such as PVY_CP \
---pathogen_protein_path #path_of_your_pathogen_protein_structure, such as Pathogen_protein/PVY_CP.pdb \
+	--pathogen_protein_path #path_of_your_pathogen_protein_structure, such as Pathogen_protein/PVY_CP.pdb \
 	--binder_lengths the_max_and_min_of_binder # such as '[76, 130]' \
 	--number_of_final_designs num_of_binder_design # default 130 \
 	--target_hotspot null
