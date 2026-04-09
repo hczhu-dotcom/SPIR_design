@@ -1,5 +1,4 @@
 # SPIR_design
-Code for SPIR design
 
 This repository is used for designing of Synthetic Plant Immune Receptor (SPIR)
 
@@ -10,14 +9,16 @@ This repository is based on BindCraft (https://github.com/martinpacesa/BindCraft
 git clone https://github.com/hczhu-dotcom/SPIR_design
 ```
 
-## Step2: Predecting the structure of plant pathogen protein 
+## Step2: Predecting the structure of plant pathogen protein.
 Predecting the structure of plant pathogen protein using AlphaFold 3, by using its webserver: https://alphafoldserver.com/.
 
-## Step3: Triming the pathogen protein
-Triming the N and C unstructured region of the plant pathogen protein using PyMol, and converting the CIF (Crystallographic Information File) format into the PDB (Protein Data Bank) format. This process would result the pathogen_protein.pdb, such as PVY_CP.pdb.
+## Step3: Triming the unstructured region of the pathogen protein.
+Triming the N- and C- unstructured region of the plant pathogen protein using PyMol, and converting the CIF (Crystallographic Information File) format into the PDB (Protein Data Bank) format. This process would result the pathogen_protein.pdb, such as PVY_CP.pdb. The structure of core region can be also predicted again using AlphaFold 3, and those with high model confidence (pTM > 0.8) were considered suitable for subsequent binder design and used as input structures. 
 
-## Step4: Generating the input json file for BindCraft, by running: 
+Put the pdb file of core pathogen protein in ./Pathogen_protein folder.
 
+## Step4: Generating the input json file for BindCraft.
+Generating the input json file for BindCraft, by running: 
 ```bash
 conda activate BindCraft
 python step4_bindercraft_input_json \
@@ -27,6 +28,8 @@ python step4_bindercraft_input_json \
 	--number_of_final_designs num_of_binder_design # default 130 \
 	--target_hotspot null
 ```
+This run would also extract the aa sequences from all pdb files in ./Pathogen_protein and generate a collective fasta file: ./Plant_pathogen_proteins.fasta.
+
 Alternatively, you can also generate the BindCraft input json file manually following the guideline in https://github.com/martinpacesa/BindCraft.
 
 ## Step5: Runing BindCraft binder design pipeline, by running:
@@ -47,7 +50,7 @@ After finishing the binder design process, you can summarize the results of Bind
 ```bash
 conda activate BindCraft
 python \
-step22_bindercraft_summary.py \
+step6_bindercraft_summary.py \
 	--input_folder ../BindCraft/your_case_name/ \
 	--output_csv ../BindCraft/your_case_name/bindcraft_summary.csv
 ```
@@ -59,7 +62,7 @@ To predict the structures of binder monomer, run the script:
 
 ```bash
 conda activate phsdk
-python3 step14_run_helixfold3_api_in_folder_hczhu.py \
+python3 step7_run_helixfold3_api_in_folder.py \
 	--input_csv_file --output_csv ../BindCraft/your_case_name/bindcraft_summary.csv\
 	--input_type csv \
 	--output_folder ../BindCraft/your_case_name/HF3_binder_monomer \
@@ -84,7 +87,7 @@ To predict the structures of binder dimer , run the script:
 
 ```bash
 conda activate phsdk
-python3 step14_run_helixfold3_api_in_folder_hczhu.py \
+python3 step7_run_helixfold3_api_in_folder.py \
 	--input_csv_file --output_csv ../BindCraft/your_case_name/bindcraft_summary.csv\
 	--input_type csv \
 	--output_folder ../BindCraft/your_case_name/HF3_binder_dimer \
@@ -109,7 +112,7 @@ To predict the structures of pathogen protein-binder dimer, run the script:
 
 ```bash
 conda activate phsdk
-python3 step14_run_helixfold3_api_in_folder_hczhu.py \
+python3 step7_run_helixfold3_api_in_folder.py \
 	--input_csv_file --output_csv ../BindCraft/your_case_name/bindcraft_summary.csv\
 	--input_type csv \
 	--output_folder ../BindCraft/your_case_name/HF3_binder_effector_dimer \
@@ -133,7 +136,7 @@ python3 step14_run_helixfold3_api_in_folder_hczhu.py \
 After finishing the HelixFold3 and downloading all the result, run the scripts to summary the results of HelixFold3.
 
 ```bash
-python3 step14_run_helixfold3_api_in_folder_hczhu.py \
+python3 step7_run_helixfold3_api_in_folder.py \
 	--input_csv_file --output_csv ../BindCraft/your_case_name/bindcraft_summary.csv\
 	--input_type csv \
 	--output_folder ../BindCraft/your_case_name/HF3_binder_monomer \
@@ -146,7 +149,7 @@ python3 step14_run_helixfold3_api_in_folder_hczhu.py \
 	--require_dna_seq 0 
 ```
 ```bash
-python3 step14_run_helixfold3_api_in_folder_hczhu.py \
+python3 step7_run_helixfold3_api_in_folder.py \
 	--input_csv_file --output_csv ../BindCraft/your_case_name/bindcraft_summary.csv\
 	--input_type csv \
 	--output_folder ../BindCraft/your_case_name/HF3_binder_dimer \
@@ -159,7 +162,7 @@ python3 step14_run_helixfold3_api_in_folder_hczhu.py \
 	--require_dna_seq 0 
 ```
 ```bash
-python3 step14_run_helixfold3_api_in_folder_hczhu.py \
+python3 step7_run_helixfold3_api_in_folder.py \
 	--input_csv_file --output_csv ../BindCraft/your_case_name/bindcraft_summary.csv\
 	--input_type csv \
 	--output_folder ../BindCraft/your_case_name/HF3_binder_effector_dimer \
@@ -172,7 +175,9 @@ python3 step14_run_helixfold3_api_in_folder_hczhu.py \
 	--require_dna_seq 1 
 ```
 
-If “--require_dna_seq” is set of 1, the script would generate the DNA sequences of binder. The ipTM and pTM scores of each state of each binder are recorded in the output file of HelixFold3. Binders with ideal predicted performance could be synthesized for further experimental validation.
+If “--require_dna_seq” is set of 1, the script would generate the DNA sequences of binder. The ipTM and pTM scores of each state of each binder are recorded in the output file of HelixFold3. 
+
+Binders with ideal predicted performance could be synthesized for further experimental validation.
 
 
 ## Credits
