@@ -2,7 +2,11 @@
 
 This repository is used for designing of Synthetic Plant Immune Receptor (SPIR)
 
-This repository is based on BindCraft (https://github.com/martinpacesa/BindCraft) and Helixfold 3 (https://gitee.com/paddlehelix/paddlehelix), so please Install these two software first, and create two conda environments (named BindCraft and phsdk, respectively, if use the default names)
+This repository is based on BindCraft (https://github.com/martinpacesa/BindCraft) and Helixfold 3 (https://gitee.com/paddlehelix/paddlehelix), so please install these two software first, and create two corresponding conda environments (named BindCraft and phsdk, respectively, if use the default names). We recommend to use the api of PaddleHelix. To do so, you need a PaddleHelix account first, following the guideline in (https://paddlehelix.baidu.com/). Pymol package also is required to be installed the phsdk environment, you can install this pymol by running:
+
+```bash
+pip install pymol-open-source-whl
+```
 
 ## Step1: Cloning this repository.
 ```bash
@@ -21,11 +25,11 @@ Put the pdb file of core pathogen protein in ./Pathogen_protein folder.
 Generating the input json file for BindCraft, by running: 
 ```bash
 conda activate BindCraft
-python step4_bindercraft_input_json \
-	--your_case_name #the_name_of_your_job, such as PVY_CP \
-	--pathogen_protein_path #path_of_your_pathogen_protein_structure, such as Pathogen_protein/PVY_CP.pdb \
-	--binder_lengths the_max_and_min_of_binder # such as '[76, 130]' \
-	--number_of_final_designs num_of_binder_design # default 130 \
+python step4_bindercraft_input_json.py \
+	--your_case_name PVY_CPv1#the_name_of_your_job, such as PVY_CP \
+	--pathogen_protein_path #absolute path of your pathogen protein structure, such as Pathogen_protein/PVY_CP.pdb \
+	--binder_lengths the_max_and_min_of_binder '[76, 130]  #such as '[76, 130]' \
+	--number_of_final_designs num_of_binder_design 130  #default 130 \
 	--target_hotspot null
 ```
 This run would also extract the aa sequences from all pdb files in ./Pathogen_protein and generate a collective fasta file: ./Plant_pathogen_proteins.fasta.
@@ -37,8 +41,8 @@ Alternatively, you can also generate the BindCraft input json file manually foll
 ```bash
 conda activate BindCraft
 python3.10 -u ../BindCraft/bindcraft.py \
-	--settings ../BindCraft/settings_target/your_case_name.json \
-	--filters ../BindCraft/settings_filters/effector_filters3.json \
+	--settings ../BindCraft/settings_target/PVY_CPv1.json #your case name\
+	--filters ../BindCraft/settings_filters/default_filters.json \
 	--advanced ../BindCraft/settings_advanced/default_4stage_multimer.json 
 ```
 This process would take several hours to generate ~100 final binder designs passing all filters as recommended.
@@ -55,7 +59,7 @@ step6_bindercraft_summary.py \
 	--output_csv ../BindCraft/your_case_name/bindcraft_summary.csv
 ```
 
-## Step7: Validating the candidate binders using HelixFold3
+## Step7: Validating the candidate binders using HelixFold 3
 The output binders designed by BindCraft should be further validated by HelixFold3. For each candidate binder, three structural models were predicted: the binder-pathogen protein heterodimer, the binder-binder homodimer, and the binder monomer, to evaluate their binding affinity, oligomerization potential, and structural stability, respectively. Binders were filtered out if the inter-chain predicted TM-score (ipTM) of the heterodimer was below 0.85, the ipTM of the homodimer was above 0.6, or the predicted TM-score (pTM) of the monomer was below 0.85. We suggest to use the api of HelixFold3.
 
 To predict the structures of binder monomer, run the script:
