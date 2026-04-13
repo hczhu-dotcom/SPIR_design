@@ -66,6 +66,7 @@ Scripts/step6_bindercraft_summary.py \
 The output binders designed by BindCraft should be further validated by HelixFold3. For each candidate binder, three structural models were predicted: the binder-pathogen protein heterodimer, the binder-binder homodimer, and the binder monomer, to evaluate their binding affinity, oligomerization potential, and structural stability, respectively. Binders were filtered out if the inter-chain predicted TM-score (ipTM) of the heterodimer was below 0.85, the ipTM of the homodimer was above 0.6, or the predicted TM-score (pTM) of the monomer was below 0.85. We suggest to use the api of HelixFold3.
 
 To predict the structures of binder monomer, run the script:
+Note, we recommend you to use the absolute path of all input files
 
 ```bash
 conda activate phsdk
@@ -101,7 +102,7 @@ python3 Scripts/step7_run_helixfold3_api_in_folder.py \
 	--input_type csv \
 	--output_folder your_path/BindCraft/my_cases/PVY_CPv1/HF3_binder_dimer \
 	--input_name_column 'Design' \
-	--antigen_column 'antigen_sequence' \
+	--antigen_column 'binder_sequence' \
 	--nanobody_column 'binder_sequence' \
 	--proportion2next_step 0 \
 	--num_of_sequence2next_step 0 \
@@ -146,7 +147,9 @@ python3 Scripts/step7_run_helixfold3_api_in_folder.py \
 After finishing the HelixFold3 and downloading all the result, run the scripts to summary the results of HelixFold3.
 
 ```bash
-python3 step7_run_helixfold3_api_in_folder.py \
+conda activate phsdk
+cd /public-supool/home/gaolab/haochengzhu/SPIR_design
+python3 Scripts/step7_run_helixfold3_api_in_folder.py \
 	--input_csv_file your_path/BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
 	--output_folder your_path/BindCraft/my_cases/PVY_CPv1/HF3_binder_monomer \
@@ -159,7 +162,9 @@ python3 step7_run_helixfold3_api_in_folder.py \
 	--require_dna_seq 0 
 ```
 ```bash
-python3 step7_run_helixfold3_api_in_folder.py \
+conda activate phsdk
+cd /public-supool/home/gaolab/haochengzhu/SPIR_design
+python3 Scripts/step7_run_helixfold3_api_in_folder.py \
 	--input_csv_file your_path/BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
 	--output_folder your_path/BindCraft/my_cases/PVY_CPv1/HF3_binder_dimer \
@@ -172,7 +177,9 @@ python3 step7_run_helixfold3_api_in_folder.py \
 	--require_dna_seq 0 
 ```
 ```bash
-python3 step7_run_helixfold3_api_in_folder.py \
+conda activate phsdk
+cd /public-supool/home/gaolab/haochengzhu/SPIR_design
+python3 Scripts/step7_run_helixfold3_api_in_folder.py \
 	--input_csv_file your_path/BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
 	--output_folder your_path/BindCraft/my_cases/PVY_CPv1/HF3_binder_effector_dimer \
