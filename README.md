@@ -2,10 +2,11 @@
 
 This repository is used for designing of Synthetic Plant Immune Receptor (SPIR)
 
-This repository is based on BindCraft (https://github.com/martinpacesa/BindCraft) and Helixfold 3 (https://gitee.com/paddlehelix/paddlehelix), so please install these two software first, and create two corresponding conda environments (named BindCraft and phsdk, respectively, if use the default names). We recommend to use the api of PaddleHelix. To do so, you need a PaddleHelix account first, following the guideline in (https://paddlehelix.baidu.com/). Pymol package also is required to be installed the phsdk environment, you can install this pymol by running:
+This repository is based on BindCraft (https://github.com/martinpacesa/BindCraft) and Helixfold 3 (https://gitee.com/paddlehelix/paddlehelix), so please install these two software first, and create two corresponding conda environments (named BindCraft and phsdk, respectively, if use the default names). We recommend to use the api of PaddleHelix. To do so, you need a PaddleHelix account first, following the guideline in (https://paddlehelix.baidu.com/). Pymol and prodigy package also is required to be installed the phsdk environment, you can install this pymol by running:
 
 ```bash
 pip install pymol-open-source-whl
+pip install prodigy-prot
 ```
 
 ## Step1: Cloning this repository.
@@ -25,7 +26,8 @@ Put the pdb file of core pathogen protein in ./Pathogen_protein folder.
 Generating the input json file for BindCraft, by running: 
 ```bash
 conda activate BindCraft
-python step4_bindercraft_input_json.py \
+cd SPIR_design
+python Scripts/step4_bindercraft_input_json.py \
 	--your_case_name PVY_CPv1#the_name_of_your_job, such as PVY_CP \
 	--pathogen_protein_path #absolute path of your pathogen protein structure, such as Pathogen_protein/PVY_CP.pdb \
 	--binder_lengths the_max_and_min_of_binder '[76, 130]  #such as '[76, 130]' \
@@ -53,10 +55,11 @@ After finishing the binder design process, you can summarize the results of Bind
 
 ```bash
 conda activate BindCraft
+cd SPIR_design
 python \
-step6_bindercraft_summary.py \
-	--input_folder ../BindCraft/your_case_name/ \
-	--output_csv ../BindCraft/your_case_name/bindcraft_summary.csv
+Scripts/step6_bindercraft_summary.py \
+	--input_folder ../BindCraft/my_cases/PVY_CPv1 \
+	--output_csv ../BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv
 ```
 
 ## Step7: Validating the candidate binders using HelixFold 3
@@ -66,10 +69,11 @@ To predict the structures of binder monomer, run the script:
 
 ```bash
 conda activate phsdk
-python3 step7_run_helixfold3_api_in_folder.py \
-	--input_csv_file --output_csv ../BindCraft/your_case_name/bindcraft_summary.csv\
+cd SPIR_design
+python3 Scripts/step7_run_helixfold3_api_in_folder.py \
+	--input_csv_file ../BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
-	--output_folder ../BindCraft/your_case_name/HF3_binder_monomer \
+	--output_folder ../BindCraft/my_cases/PVY_CPv1/HF3_binder_monomer \
 	--input_name_column 'Design' \
 	--antigen_column 'antigen_sequence' \
 	--nanobody_column 'binder_sequence' \
@@ -91,10 +95,11 @@ To predict the structures of binder dimer , run the script:
 
 ```bash
 conda activate phsdk
-python3 step7_run_helixfold3_api_in_folder.py \
-	--input_csv_file --output_csv ../BindCraft/your_case_name/bindcraft_summary.csv\
+cd SPIR_design
+python3 Scripts/step7_run_helixfold3_api_in_folder.py \
+	--input_csv_file ../BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
-	--output_folder ../BindCraft/your_case_name/HF3_binder_dimer \
+	--output_folder ../BindCraft/my_cases/PVY_CPv1/HF3_binder_dimer \
 	--input_name_column 'Design' \
 	--antigen_column 'antigen_sequence' \
 	--nanobody_column 'binder_sequence' \
@@ -116,10 +121,11 @@ To predict the structures of pathogen protein-binder dimer, run the script:
 
 ```bash
 conda activate phsdk
-python3 step7_run_helixfold3_api_in_folder.py \
-	--input_csv_file --output_csv ../BindCraft/your_case_name/bindcraft_summary.csv\
+cd SPIR_design
+python3 Scripts/step7_run_helixfold3_api_in_folder.py \
+	--input_csv_file /public-supool/home/gaolab/haochengzhu/BindCraft/my_cases/your_case_name/bindcraft_summary.csv \
 	--input_type csv \
-	--output_folder ../BindCraft/your_case_name/HF3_binder_effector_dimer \
+	--output_folder /public-supool/home/gaolab/haochengzhu/BindCraft/my_cases/your_case_name/HF3_binder_effector_dimer \
 	--input_name_column 'Design' \
 	--antigen_column 'antigen_sequence' \
 	--nanobody_column 'binder_sequence' \
