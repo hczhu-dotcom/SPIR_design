@@ -71,9 +71,9 @@ To predict the structures of binder monomer, run the script:
 conda activate phsdk
 cd SPIR_design
 python3 Scripts/step7_run_helixfold3_api_in_folder.py \
-	--input_csv_file ../BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
+	--input_csv_file your_path/BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
-	--output_folder ../BindCraft/my_cases/PVY_CPv1/HF3_binder_monomer \
+	--output_folder your_path/BindCraft/my_cases/PVY_CPv1/HF3_binder_monomer \
 	--input_name_column 'Design' \
 	--antigen_column 'antigen_sequence' \
 	--nanobody_column 'binder_sequence' \
@@ -97,9 +97,9 @@ To predict the structures of binder dimer , run the script:
 conda activate phsdk
 cd SPIR_design
 python3 Scripts/step7_run_helixfold3_api_in_folder.py \
-	--input_csv_file ../BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
+	--input_csv_file your_path/BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
-	--output_folder ../BindCraft/my_cases/PVY_CPv1/HF3_binder_dimer \
+	--output_folder your_path/BindCraft/my_cases/PVY_CPv1/HF3_binder_dimer \
 	--input_name_column 'Design' \
 	--antigen_column 'antigen_sequence' \
 	--nanobody_column 'binder_sequence' \
@@ -123,9 +123,9 @@ To predict the structures of pathogen protein-binder dimer, run the script:
 conda activate phsdk
 cd SPIR_design
 python3 Scripts/step7_run_helixfold3_api_in_folder.py \
-	--input_csv_file /public-supool/home/gaolab/haochengzhu/BindCraft/my_cases/your_case_name/bindcraft_summary.csv \
+	--input_csv_file your_path/BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
-	--output_folder /public-supool/home/gaolab/haochengzhu/BindCraft/my_cases/your_case_name/HF3_binder_effector_dimer \
+	--output_folder your_path/BindCraft/my_cases/PVY_CPv1/HF3_binder_effector_dimer \
 	--input_name_column 'Design' \
 	--antigen_column 'antigen_sequence' \
 	--nanobody_column 'binder_sequence' \
@@ -147,9 +147,9 @@ After finishing the HelixFold3 and downloading all the result, run the scripts t
 
 ```bash
 python3 step7_run_helixfold3_api_in_folder.py \
-	--input_csv_file --output_csv ../BindCraft/your_case_name/bindcraft_summary.csv\
+	--input_csv_file your_path/BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
-	--output_folder ../BindCraft/your_case_name/HF3_binder_monomer \
+	--output_folder your_path/BindCraft/my_cases/PVY_CPv1/HF3_binder_monomer \
 	--proportion2next_step 0 \
 	--num_of_sequence2next_step 0 \
 	--iptm_cut_off 0.71 \
@@ -160,9 +160,9 @@ python3 step7_run_helixfold3_api_in_folder.py \
 ```
 ```bash
 python3 step7_run_helixfold3_api_in_folder.py \
-	--input_csv_file --output_csv ../BindCraft/your_case_name/bindcraft_summary.csv\
+	--input_csv_file your_path/BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
-	--output_folder ../BindCraft/your_case_name/HF3_binder_dimer \
+	--output_folder your_path/BindCraft/my_cases/PVY_CPv1/HF3_binder_dimer \
 	--proportion2next_step 0 \
 	--num_of_sequence2next_step 0 \
 	--iptm_cut_off 0.71 \
@@ -173,9 +173,9 @@ python3 step7_run_helixfold3_api_in_folder.py \
 ```
 ```bash
 python3 step7_run_helixfold3_api_in_folder.py \
-	--input_csv_file --output_csv ../BindCraft/your_case_name/bindcraft_summary.csv\
+	--input_csv_file your_path/BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
-	--output_folder ../BindCraft/your_case_name/HF3_binder_effector_dimer \
+	--output_folder your_path/BindCraft/my_cases/PVY_CPv1/HF3_binder_effector_dimer \
 	--proportion2next_step 0 \
 	--num_of_sequence2next_step 0 \
 	--iptm_cut_off 0.71 \
