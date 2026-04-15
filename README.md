@@ -192,7 +192,9 @@ python3 Scripts/step7_run_helixfold3_api_in_folder.py \
 	--require_dna_seq 1 
 ```
 
-If “--require_dna_seq” is set of 1, the script would generate the DNA sequences of binder. The ipTM and pTM scores of each state of each binder are recorded in the output file of HelixFold3. 
+If “--require_dna_seq” is set of 1, the script would generate the DNA sequences of binder. The ipTM and pTM scores of each state of each binder are recorded in the output file of HelixFold3:  \BindCraft/my_cases/PVY_CPv1/HF3_binder_effector_dimer/helixfold3_bestone_with_dimer_summary.csv
+
+The structures of binder monomer and binder-pathogen protein dimer were also aligned and stored in  /BindCraft/my_cases/PVY_CPv1/HF3_binder_effector_dimer/merge_pse folder. Checking the file to select the binder for DNA synthesis.
 
 Binders with ideal predicted performance could be synthesized for further experimental validation.
 
