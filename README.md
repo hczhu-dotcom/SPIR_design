@@ -148,7 +148,7 @@ After finishing the HelixFold3 and downloading all the result, run the scripts t
 
 ```bash
 conda activate phsdk
-cd /public-supool/home/gaolab/haochengzhu/SPIR_design
+cd SPIR_design
 python3 Scripts/step7_run_helixfold3_api_in_folder.py \
 	--input_csv_file your_path/BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
@@ -163,7 +163,7 @@ python3 Scripts/step7_run_helixfold3_api_in_folder.py \
 ```
 ```bash
 conda activate phsdk
-cd /public-supool/home/gaolab/haochengzhu/SPIR_design
+cd SPIR_design
 python3 Scripts/step7_run_helixfold3_api_in_folder.py \
 	--input_csv_file your_path/BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
@@ -178,7 +178,7 @@ python3 Scripts/step7_run_helixfold3_api_in_folder.py \
 ```
 ```bash
 conda activate phsdk
-cd /public-supool/home/gaolab/haochengzhu/SPIR_design
+cd SPIR_design
 python3 Scripts/step7_run_helixfold3_api_in_folder.py \
 	--input_csv_file your_path/BindCraft/my_cases/PVY_CPv1/bindcraft_summary.csv \
 	--input_type csv \
